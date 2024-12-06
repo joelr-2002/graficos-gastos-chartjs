@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfica Personalizada</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.5/cdn.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        canvas {
+            max-width: 100%;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="p-8 bg-gray-100" x-data="chartCustomizer()">
+    <h1 class="text-2xl font-bold mb-4">Gráfica Personalizada</h1>
+
+    <div class="grid grid-cols-2 gap-8">
+        <div class="bg-white p-4 shadow rounded">
+            <h2 class="text-lg font-bold mb-2">Configuración de Gráfica</h2>
+
+            <label class="block mb-2">
+                Tipo de gráfico:
+                <select x-model="selectedChartType" class="border p-2 rounded w-full mb-4">
+                    <option value="bar">Barra</option>
+                    <option value="pie">Pastel</option>
+                </select>
+            </label>
+
+            <template x-for="(dataset, index) in datasets" :key="index">
+                <div class="mb-4 border-b pb-2">
+                    <label class="block mb-2">
+                        Etiquetas para Dataset <span x-text="index + 1"></span> (separadas por coma):
+                        <input type="text" x-model="dataset.labels" class="border p-2 rounded w-full">
+                    </label>
+
+                    <label class="block mb-2">
+                        Valores para Dataset <span x-text="index + 1"></span> (separados por coma):
+                        <input type="text" x-model="dataset.data" class="border p-2 rounded w-full">
+                    </label>
+
+                    <label class="block mb-2 flex items-center">
+                        Color del Dataset <span x-text="index + 1"></span>:
+                        <input type="color" x-model="dataset.color" class="border p-2 rounded-full w-12 h-12 ml-1">
+                    </label>
+
+                    <label class="block mb-2">
+                        Etiqueta del Dataset <span x-text="index + 1"></span>:
+                        <input type="text" x-model="dataset.label" class="border p-2 rounded w-full">
+                    </label>
+                </div>
+            </template>
+
+            <button @click="addDataset" class="bg-blue-500 text-white py-2 px-4 rounded mb-2">Añadir Dataset</button>
+
+            <label class="block mb-2">
+                Tamaño de la fuente:
+                <input type="number" x-model="fontSize" class="border p-2 rounded w-full mb-4" step="1">
+            </label>
+
+            <label class="block mb-2">
+                Fuente:
+                <select x-model="fontFamily" class="border p-2 rounded w-full mb-4">
+                    <option value="Arial">Arial</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
+            </label>
+
+            <button @click="updateChart" class="bg-blue-500 text-white py-2 px-4 rounded">Actualizar Gráfico</button>
+        </div>
+
+        <div class="bg-white shadow rounded p-4">
+            <canvas id="customChart"></canvas>
+            <button @click="downloadChart('customChart')" class="mt-2 bg-green-500 text-white py-2 px-4 rounded">Descargar Gráfico</button>
+            <button @click="copyToClipboard('customChart')" class="mt-2 bg-yellow-500 text-white py-2 px-4 rounded">Copiar Gráfico</button>
+        </div>
+    </div>
+
+    <script src="js/customizer.js"></script>
+</body>
+</html>

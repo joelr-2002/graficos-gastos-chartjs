@@ -21,6 +21,11 @@
         <span x-text="showForm ? 'Ocultar Formulario' : 'Editar'"></span>
     </button>
 
+    <!-- Botón "Crea mi propia Gráfica" -->
+    <button @click="createCustomChart" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">
+        Crea mi propia Gráfica
+    </button>
+
     <!-- Formulario para editar datos -->
     <div x-show="showForm" class="bg-white p-4 mb-8 shadow rounded">
         <h2 class="text-lg font-bold mb-2">Editar Datos</h2>

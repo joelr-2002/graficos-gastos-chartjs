@@ -291,6 +291,11 @@ function chartData() {
                     console.error('Error al copiar la imagen al portapapeles', err);
                 });
             });
+        },
+
+        createCustomChart() {
+            // Redirige a ../customizer.html
+            window.location.href = './customizer.html';
         }
     };
 }
