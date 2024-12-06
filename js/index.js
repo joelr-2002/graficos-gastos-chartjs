@@ -21,6 +21,7 @@ function chartData() {
         createMonthlyChart() {
             const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
             const monthlyPercentages = this.monthlyData.map(value => (value / this.totalBudget.executed) * 100);
+            const suggestedMax = Math.max(...monthlyPercentages) + 10;
             this.monthlyChart = new Chart(monthlyCtx, {
                 type: 'bar',
                 data: {
@@ -45,7 +46,7 @@ function chartData() {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            suggestedMax: 30,
+                            suggestedMax: suggestedMax,
                             title: {
                                 display: true,
                                 text: 'Porcentaje (%)'
