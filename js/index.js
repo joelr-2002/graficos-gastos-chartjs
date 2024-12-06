@@ -41,6 +41,13 @@ function chartData() {
                                 size: 28,
                                 weight: 'bold'
                             }
+                        },
+                        legend: {
+                            labels: {
+                                font: {
+                                    size: 24
+                                }
+                            }
                         }
                     },
                     scales: {
@@ -123,13 +130,28 @@ function chartData() {
                                 });
                             });
                         }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                font: {
+                                    size: 35
+                                }
+                            }
+                        }
                     }
                 }
             });
         },
 
         createPieChart() {
-            const pieCtx = document.getElementById('pieChart').getContext('2d');
+            const pieCanvas = document.getElementById('pieChart');
+            
+            // Reducir el tamaño del canvas (gráfico de pastel)
+            pieCanvas.width = 200;  // Ajusta el valor según sea necesario
+            pieCanvas.height = 200; // Ajusta el valor según sea necesario
+        
+            const pieCtx = pieCanvas.getContext('2d');
             const executedPercent = (this.totalBudget.executed / this.totalBudget.budget) * 100;
             const remainingPercent = 100 - executedPercent;
             this.pieChart = new Chart(pieCtx, {
@@ -154,18 +176,18 @@ function chartData() {
                                     const middleAngle = (piece.startAngle + piece.endAngle) / 2;
                                     const x = pieCtx.canvas.width / 2 + Math.cos(middleAngle) * (piece.outerRadius / 1.5);
                                     const y = pieCtx.canvas.height / 2 + Math.sin(middleAngle) * (piece.outerRadius / 1.5);
-
+        
                                     const value = index === 0 ? totalBudget.executed : totalBudget.budget - totalBudget.executed;
                                     const formattedValue = `L ${value.toLocaleString()}`;
-
+        
                                     // Draw the value above the percentage
                                     ctx.fillStyle = '#fff';
                                     ctx.textAlign = 'center';
-                                    ctx.font = '24px Arial';
-                                    ctx.fillText(formattedValue, x, y - 20);
-
+                                    ctx.font = '48px Arial'; // Aumenta el tamaño de fuente
+                                    ctx.fillText(formattedValue, x, y - 30);
+        
                                     // Draw the percentage
-                                    ctx.font = '20px Arial';
+                                    ctx.font = '44px Arial'; // Aumenta el tamaño de fuente
                                     ctx.fillText(`${dataset.data[index].toFixed(2)}%`, x, y + 10);
                                 });
                             });
@@ -176,8 +198,15 @@ function chartData() {
                             display: true,
                             text: `TOTAL PRESUPUESTADO: L ${this.totalBudget.budget.toLocaleString()}`,
                             font: {
-                                size: 28,
+                                size: 42,  // Aumenta el tamaño del título
                                 weight: 'bold'
+                            }
+                        },
+                        legend: {
+                            labels: {
+                                font: {
+                                    size: 38  // Aumenta el tamaño de fuente
+                                }
                             }
                         }
                     },
