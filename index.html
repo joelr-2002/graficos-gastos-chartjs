@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Gráfico de Presupuesto</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.5/cdn.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        canvas {
+            max-width: 100%;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="p-8 bg-gray-100" x-data="chartData()">
+
+    <h1 class="text-2xl font-bold mb-4">Gráfico de Presupuesto</h1>
+
+    <!-- Botón para mostrar/ocultar el formulario -->
+    <button @click="showForm = !showForm" class="bg-gray-500 text-white py-2 px-4 rounded mb-4">
+        <span x-text="showForm ? 'Ocultar Formulario' : 'Editar'"></span>
+    </button>
+
+    <!-- Formulario para editar datos -->
+    <div x-show="showForm" class="bg-white p-4 mb-8 shadow rounded">
+        <h2 class="text-lg font-bold mb-2">Editar Datos</h2>
+
+        <template x-if="errorMessage">
+            <div class="bg-red-100 text-red-700 p-2 rounded mb-2" x-text="errorMessage"></div>
+        </template>
+        
+        <div class="mb-2">
+            <label class="block font-medium">Presupuesto Total (L)</label>
+            <input type="number" x-model.number="totalBudget.budget" class="border p-2 rounded w-full" step="0.01">
+        </div>
+        
+        <div class="mb-2">
+            <label class="block font-medium">Ejecutado Total (L)</label>
+            <input type="number" x-model.number="totalBudget.executed" class="border p-2 rounded w-full" step="0.01">
+        </div>
+
+        <template x-for="(month, index) in monthlyData" :key="index">
+            <div class="mb-2">
+                <div class="flex items-center space-x-2">
+                    <input type="text" x-model="monthLabels[index]" class="border p-2 rounded w-1/2" placeholder="Mes">
+                    <input type="number" x-model.number="monthlyData[index]" class="border p-2 rounded w-1/2" step="0.01" placeholder="Ejecutado (L)">
+                    <button @click="removeMonth(index)" class="bg-red-500 text-white p-1 rounded">X</button>
+                </div>
+            </div>
+        </template>
+
+        <button @click="addMonth" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Añadir Mes</button>
+        
+        <button @click="updateCharts" class="bg-blue-500 text-white py-2 px-4 rounded">Actualizar Gráficos</button>
+    </div>
+
+    <div class="mb-8 bg-white shadow rounded">
+        <canvas id="monthlyChart"></canvas>
+        <button @click="downloadChart('monthlyChart')" class="mt-2 bg-green-500 text-white py-2 px-4 rounded">Descargar Monthly Chart</button>
+        <button @click="copyToClipboard('monthlyChart')" class="mt-2 bg-yellow-500 text-white py-2 px-4 rounded">Copiar Monthly Chart</button>
+    </div>
+
+    <div class="mb-8 bg-white shadow rounded">
+        <canvas id="barChart"></canvas>
+        <button @click="downloadChart('barChart')" class="mt-2 bg-green-500 text-white py-2 px-4 rounded">Descargar Bar Chart</button>
+        <button @click="copyToClipboard('barChart')" class="mt-2 bg-yellow-500 text-white py-2 px-4 rounded">Copiar Bar Chart</button>
+    </div>
+
+    <div class="mb-8 bg-white shadow rounded">
+        <canvas id="pieChart"></canvas>
+        <button @click="downloadChart('pieChart')" class="mt-2 bg-green-500 text-white py-2 px-4 rounded">Descargar Pie Chart</button>
+        <button @click="copyToClipboard('pieChart')" class="mt-2 bg-yellow-500 text-white py-2 px-4 rounded">Copiar Pie Chart</button>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
