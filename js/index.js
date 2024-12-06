@@ -29,7 +29,7 @@ function chartData() {
                     datasets: [{
                         label: '% Ejecutado Mensual',
                         data: monthlyPercentages,
-                        backgroundColor: '#10B981'
+                        backgroundColor: '#00A797'
                     }]
                 },
                 options: {
@@ -88,7 +88,7 @@ function chartData() {
                         {
                             label: 'Presupuesto (L)',
                             data: [this.totalBudget.budget],
-                            backgroundColor: '#10B981'
+                            backgroundColor: '#00A797'
                         },
                         {
                             label: 'Ejecutado (L)',
@@ -138,7 +138,7 @@ function chartData() {
                     labels: ['% Ejecutado', '% No Ejecutado'],
                     datasets: [{
                         data: [executedPercent, remainingPercent],
-                        backgroundColor: ['#10B981', '#5B9BC6']
+                        backgroundColor: ['#00A797', '#5B9BC6']
                     }]
                 },
                 options: {
