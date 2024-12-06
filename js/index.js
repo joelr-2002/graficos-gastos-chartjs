@@ -56,7 +56,15 @@ function chartData() {
                             suggestedMax: suggestedMax,
                             title: {
                                 display: true,
-                                text: 'Porcentaje (%)'
+                                text: 'Porcentaje (%)',
+                                font: {
+                                    size: 28
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    size: 24
+                                }
                             }
                         }
                     },
@@ -110,7 +118,15 @@ function chartData() {
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: 'Valores en L'
+                                text: 'Valores en L',
+                                font: {
+                                    size: 28
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    size: 24
+                                }
                             }
                         }
                     },
