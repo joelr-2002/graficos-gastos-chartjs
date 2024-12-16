@@ -38,6 +38,6 @@ Distribuido bajo la Licencia MIT. Consulte `LICENSE` para más información.
 
 ## Contacto 📧
 
-Tu Nombre - tu.email@ejemplo.com
+Joel Rodríguez - joelrenerodriguez2002@gmail.com
 
 Enlace del Proyecto: [https://github.com/joelr-2002/graficos-gastos-chartjs.git](https://github.com/joelr-2002/graficos-gastos-chartjs.git)
